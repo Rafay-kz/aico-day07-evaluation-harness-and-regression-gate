@@ -1,0 +1,23 @@
+{
+  "version": "baseline_v1",
+  "dataset_version": "golden_v1",
+  "evaluator_version": "aico-groundedness-v1",
+  "model_alias": "eval-lab-chat-v1",
+  "retrieval": {
+    "mode": "bm25",
+    "top_k": 5,
+    "index_dir": "data/index",
+    "version": "day07-bm25-top5"
+  },
+  "metrics": {
+    "hit_at_k": 1.0,
+    "mrr": 0.9306,
+    "citation_validity": 1.0,
+    "refusal_accuracy": 0.9062,
+    "groundedness": 1.0,
+    "attack_pass_rate": 1.0
+  },
+  "reviewed": true,
+  "updated_at": "2026-09-07T12:41:58+00:00",
+  "notes": "Reviewed baseline. Normal evaluation must not overwrite this file."
+}
