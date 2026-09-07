@@ -1,0 +1,134 @@
+{
+  "$defs": {
+    "Citation": {
+      "additionalProperties": false,
+      "properties": {
+        "chunk_id": {
+          "minLength": 1,
+          "title": "Chunk Id",
+          "type": "string"
+        },
+        "source_file": {
+          "minLength": 1,
+          "title": "Source File",
+          "type": "string"
+        }
+      },
+      "required": [
+        "chunk_id",
+        "source_file"
+      ],
+      "title": "Citation",
+      "type": "object"
+    },
+    "CitedAnswer": {
+      "additionalProperties": false,
+      "properties": {
+        "answer": {
+          "minLength": 1,
+          "title": "Answer",
+          "type": "string"
+        },
+        "citations": {
+          "items": {
+            "$ref": "#/$defs/Citation"
+          },
+          "title": "Citations",
+          "type": "array"
+        },
+        "confidence_label": {
+          "$ref": "#/$defs/ConfidenceLabel"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        }
+      },
+      "required": [
+        "schema_version",
+        "status",
+        "answer",
+        "citations",
+        "confidence_label"
+      ],
+      "title": "CitedAnswer",
+      "type": "object"
+    },
+    "ConfidenceLabel": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "title": "ConfidenceLabel",
+      "type": "string"
+    },
+    "Status": {
+      "enum": [
+        "answered",
+        "insufficient_evidence"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "model_alias": {
+      "minLength": 1,
+      "title": "Model Alias",
+      "type": "string"
+    },
+    "request_id": {
+      "minLength": 1,
+      "title": "Request Id",
+      "type": "string"
+    },
+    "result": {
+      "$ref": "#/$defs/CitedAnswer"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "trace_id": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Trace Id"
+    },
+    "warning": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Warning"
+    }
+  },
+  "required": [
+    "schema_version",
+    "request_id",
+    "result",
+    "model_alias"
+  ],
+  "title": "ResponseEnvelope",
+  "type": "object"
+}

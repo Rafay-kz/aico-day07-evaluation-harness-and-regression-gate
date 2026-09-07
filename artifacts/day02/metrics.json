@@ -1,0 +1,2512 @@
+{
+  "rrf_k": 60,
+  "score_floors": {
+    "bm25": 2.0,
+    "vector": 0.35,
+    "hybrid": 0.031099324975891997
+  },
+  "modes": {
+    "bm25": {
+      "mode": "bm25",
+      "score_floor": 2.0,
+      "rrf_k": null,
+      "scored_queries": {
+        "hit_at_1": 0.6154,
+        "hit_at_5": 0.6923,
+        "mrr": 0.6538,
+        "n": 13,
+        "ids": [
+          "Q01",
+          "Q02",
+          "Q03",
+          "Q04",
+          "Q05",
+          "Q06",
+          "Q07",
+          "Q08",
+          "Q11",
+          "Q12",
+          "Q13",
+          "Q14",
+          "Q15"
+        ]
+      },
+      "by_category": {
+        "exact_term": {
+          "hit_at_1": 0.75,
+          "hit_at_5": 1.0,
+          "mrr": 0.875,
+          "n": 4
+        },
+        "synonym_poor": {
+          "hit_at_1": 0.5,
+          "hit_at_5": 0.5,
+          "mrr": 0.5,
+          "n": 2
+        },
+        "multi_chunk": {
+          "hit_at_1": 1.0,
+          "hit_at_5": 1.0,
+          "mrr": 1.0,
+          "n": 2,
+          "full_hit_rate": 1.0
+        },
+        "semantic_only": {
+          "hit_at_1": 0.4,
+          "hit_at_5": 0.4,
+          "mrr": 0.4,
+          "n": 5
+        }
+      },
+      "no_match": {
+        "n": 3,
+        "ids": [
+          "Q09",
+          "Q10",
+          "Q16"
+        ],
+        "correct_count": 0,
+        "correct_rate": 0.0,
+        "queries": {
+          "Q09": {
+            "correct": false,
+            "max_score": 8.3264,
+            "returned_above_floor": 5
+          },
+          "Q10": {
+            "correct": false,
+            "max_score": 5.9396,
+            "returned_above_floor": 5
+          },
+          "Q16": {
+            "correct": false,
+            "max_score": 5.9987,
+            "returned_above_floor": 3
+          }
+        }
+      },
+      "per_query": [
+        {
+          "query_id": "Q01",
+          "text": "What is the minimum public liability insurance a supplier must hold?",
+          "category": "exact_term",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 12.279706386623198,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 12.2797,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 2,
+              "score": 4.429,
+              "chunk_id": "DOC-004-onboarding-screening.md:0:1872",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 3,
+              "score": 2.715,
+              "chunk_id": "DOC-001-sourcing-policy.md:3260:5186",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 4,
+              "score": 2.4868,
+              "chunk_id": "DOC-004-onboarding-screening.md:3036:5020",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 5,
+              "score": 2.418,
+              "chunk_id": "DOC-004-onboarding-screening.md:4710:6553",
+              "source_file": "DOC-004-onboarding-screening.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q02",
+          "text": "What are the standard payment terms for a valid invoice?",
+          "category": "exact_term",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 10.190655785618713,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 10.1907,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 2,
+              "score": 7.0015,
+              "chunk_id": "DOC-003-pricing-payment.md:1507:3269",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 3,
+              "score": 6.5852,
+              "chunk_id": "DOC-002-contract-terms.md:0:1842",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 4,
+              "score": 6.1044,
+              "chunk_id": "DOC-003-pricing-payment.md:0:1813",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 4.9011,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q03",
+          "text": "What weighting is given to price in supplier evaluation?",
+          "category": "exact_term",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 8.286314572684404,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 8.2863,
+              "chunk_id": "DOC-001-sourcing-policy.md:1689:3595",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 2,
+              "score": 5.0092,
+              "chunk_id": "DOC-002-contract-terms.md:1560:3260",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 3,
+              "score": 2.7833,
+              "chunk_id": "DOC-003-pricing-payment.md:1507:3269",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 2.5738,
+              "chunk_id": "DOC-003-pricing-payment.md:0:1813",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 2.0471,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q04",
+          "text": "How long is the inspection window for delivered goods?",
+          "category": "exact_term",
+          "hit_at_1": false,
+          "hit_at_5": true,
+          "first_match_rank": 2,
+          "reciprocal_rank": 0.5,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 8.744942011735471,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 8.7449,
+              "chunk_id": "DOC-005-delivery-inspection.md:0:1814",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 2,
+              "score": 8.0005,
+              "chunk_id": "DOC-005-delivery-inspection.md:4460:6305",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 3,
+              "score": 6.0653,
+              "chunk_id": "DOC-005-delivery-inspection.md:2979:4790",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 4,
+              "score": 5.3562,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 5,
+              "score": 3.8842,
+              "chunk_id": "DOC-005-delivery-inspection.md:5982:6432",
+              "source_file": "DOC-005-delivery-inspection.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q05",
+          "text": "Can a vendor hand the agreement over to another company?",
+          "category": "synonym_poor",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 1,
+          "full_hit": false,
+          "max_score": 4.418262301372794,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 4.4183,
+              "chunk_id": "DOC-001-sourcing-policy.md:0:2004",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 2,
+              "score": 3.0568,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 3,
+              "score": 2.9222,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 2.879,
+              "chunk_id": "DOC-002-contract-terms.md:0:1842",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 5,
+              "score": 2.4645,
+              "chunk_id": "DOC-001-sourcing-policy.md:3260:5186",
+              "source_file": "DOC-001-sourcing-policy.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q06",
+          "text": "Is it acceptable to split an order into several separate shipments?",
+          "category": "synonym_poor",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 4.34721330881215,
+          "returned_above_floor": 2,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 4.3472,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 2,
+              "score": 2.6935,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 3,
+              "score": 1.8507,
+              "chunk_id": "DOC-005-delivery-inspection.md:4460:6305",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 4,
+              "score": 1.8042,
+              "chunk_id": "DOC-003-pricing-payment.md:0:1813",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 1.6229,
+              "chunk_id": "DOC-005-delivery-inspection.md:0:1814",
+              "source_file": "DOC-005-delivery-inspection.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q07",
+          "text": "How much notice is required before a supplier is removed, and does the contract override it?",
+          "category": "multi_chunk",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 2,
+          "anchor_count": 2,
+          "full_hit": true,
+          "max_score": 4.01359131544816,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 4.0136,
+              "chunk_id": "DOC-001-sourcing-policy.md:4862:6793",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 2,
+              "score": 3.8354,
+              "chunk_id": "DOC-002-contract-terms.md:1560:3260",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 3,
+              "score": 3.5181,
+              "chunk_id": "DOC-004-onboarding-screening.md:3036:5020",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 4,
+              "score": 3.4737,
+              "chunk_id": "DOC-002-contract-terms.md:0:1842",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 5,
+              "score": 2.9846,
+              "chunk_id": "DOC-004-onboarding-screening.md:4710:6553",
+              "source_file": "DOC-004-onboarding-screening.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q08",
+          "text": "What must be in place before a supplier's first invoice can be paid?",
+          "category": "multi_chunk",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 2,
+          "anchor_count": 2,
+          "full_hit": true,
+          "max_score": 6.598112502027511,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 6.5981,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 2,
+              "score": 6.1014,
+              "chunk_id": "DOC-004-onboarding-screening.md:3036:5020",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 3,
+              "score": 5.0954,
+              "chunk_id": "DOC-004-onboarding-screening.md:4710:6553",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 4,
+              "score": 3.0884,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 5,
+              "score": 3.0787,
+              "chunk_id": "DOC-002-contract-terms.md:0:1842",
+              "source_file": "DOC-002-contract-terms.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q09",
+          "text": "What interest rate is charged on a late payment?",
+          "category": "no_match",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 0,
+          "full_hit": false,
+          "max_score": 8.326376702283612,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 8.3264,
+              "chunk_id": "DOC-003-pricing-payment.md:0:1813",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 2,
+              "score": 7.8862,
+              "chunk_id": "DOC-003-pricing-payment.md:1507:3269",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 3,
+              "score": 6.2055,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 5.2943,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 2.9888,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q10",
+          "text": "What penalty fee applies to a late delivery?",
+          "category": "no_match",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 0,
+          "full_hit": false,
+          "max_score": 5.939570008255369,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 5.9396,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 2,
+              "score": 4.8535,
+              "chunk_id": "DOC-005-delivery-inspection.md:2979:4790",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 3,
+              "score": 4.0418,
+              "chunk_id": "DOC-005-delivery-inspection.md:0:1814",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 4,
+              "score": 2.9561,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 2.4544,
+              "chunk_id": "DOC-002-contract-terms.md:4411:6340",
+              "source_file": "DOC-002-contract-terms.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q11",
+          "text": "What happens if a company we buy from goes bust?",
+          "category": "semantic_only",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 1,
+          "full_hit": false,
+          "max_score": 2.692909821741451,
+          "returned_above_floor": 2,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 2.6929,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 2,
+              "score": 2.6246,
+              "chunk_id": "DOC-005-delivery-inspection.md:0:1814",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.0,
+              "chunk_id": "DOC-001-sourcing-policy.md:0:2004",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0,
+              "chunk_id": "DOC-001-sourcing-policy.md:1689:3595",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0,
+              "chunk_id": "DOC-001-sourcing-policy.md:3260:5186",
+              "source_file": "DOC-001-sourcing-policy.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q12",
+          "text": "How quickly does a data leak have to be reported to us?",
+          "category": "semantic_only",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 4.252384313734623,
+          "returned_above_floor": 4,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 4.2524,
+              "chunk_id": "DOC-004-onboarding-screening.md:4710:6553",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 2,
+              "score": 3.1288,
+              "chunk_id": "DOC-004-onboarding-screening.md:3036:5020",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 3,
+              "score": 2.3419,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 4,
+              "score": 2.3202,
+              "chunk_id": "DOC-004-onboarding-screening.md:0:1872",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0,
+              "chunk_id": "DOC-001-sourcing-policy.md:0:2004",
+              "source_file": "DOC-001-sourcing-policy.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q13",
+          "text": "Do we get money off for paying a bill quickly?",
+          "category": "semantic_only",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 1,
+          "full_hit": false,
+          "max_score": 0.0,
+          "returned_above_floor": 0,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0,
+              "chunk_id": "DOC-001-sourcing-policy.md:0:2004",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.0,
+              "chunk_id": "DOC-001-sourcing-policy.md:1689:3595",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.0,
+              "chunk_id": "DOC-001-sourcing-policy.md:3260:5186",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0,
+              "chunk_id": "DOC-001-sourcing-policy.md:4862:6793",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0,
+              "chunk_id": "DOC-001-sourcing-policy.md:6444:6896",
+              "source_file": "DOC-001-sourcing-policy.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q14",
+          "text": "Who pays when a truck turns up at the wrong time and is turned away?",
+          "category": "semantic_only",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 1,
+          "full_hit": false,
+          "max_score": 3.154690118989711,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 3.1547,
+              "chunk_id": "DOC-001-sourcing-policy.md:3260:5186",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 2,
+              "score": 2.6246,
+              "chunk_id": "DOC-001-sourcing-policy.md:4862:6793",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 3,
+              "score": 2.6048,
+              "chunk_id": "DOC-002-contract-terms.md:4411:6340",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 4,
+              "score": 2.2435,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 2.163,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q15",
+          "text": "Is it ever allowed to pick one firm without asking others for prices?",
+          "category": "semantic_only",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 2.611864146128001,
+          "returned_above_floor": 4,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 2.6119,
+              "chunk_id": "DOC-001-sourcing-policy.md:3260:5186",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 2,
+              "score": 2.5983,
+              "chunk_id": "DOC-003-pricing-payment.md:0:1813",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 3,
+              "score": 2.23,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 2.0388,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 5,
+              "score": 1.3138,
+              "chunk_id": "DOC-002-contract-terms.md:2976:4741",
+              "source_file": "DOC-002-contract-terms.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q16",
+          "text": "What is the maximum bulk order discount a supplier can offer?",
+          "category": "no_match",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 0,
+          "full_hit": false,
+          "max_score": 5.998680987967681,
+          "returned_above_floor": 3,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 5.9987,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 2,
+              "score": 2.1076,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 3,
+              "score": 2.0292,
+              "chunk_id": "DOC-004-onboarding-screening.md:3036:5020",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 4,
+              "score": 1.9073,
+              "chunk_id": "DOC-003-pricing-payment.md:0:1813",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 1.8784,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            }
+          ]
+        }
+      ]
+    },
+    "vector": {
+      "mode": "vector",
+      "score_floor": 0.35,
+      "rrf_k": null,
+      "scored_queries": {
+        "hit_at_1": 0.7692,
+        "hit_at_5": 0.9231,
+        "mrr": 0.8269,
+        "n": 13,
+        "ids": [
+          "Q01",
+          "Q02",
+          "Q03",
+          "Q04",
+          "Q05",
+          "Q06",
+          "Q07",
+          "Q08",
+          "Q11",
+          "Q12",
+          "Q13",
+          "Q14",
+          "Q15"
+        ]
+      },
+      "by_category": {
+        "exact_term": {
+          "hit_at_1": 1.0,
+          "hit_at_5": 1.0,
+          "mrr": 1.0,
+          "n": 4
+        },
+        "synonym_poor": {
+          "hit_at_1": 0.5,
+          "hit_at_5": 1.0,
+          "mrr": 0.625,
+          "n": 2
+        },
+        "multi_chunk": {
+          "hit_at_1": 0.5,
+          "hit_at_5": 1.0,
+          "mrr": 0.75,
+          "n": 2,
+          "full_hit_rate": 1.0
+        },
+        "semantic_only": {
+          "hit_at_1": 0.8,
+          "hit_at_5": 0.8,
+          "mrr": 0.8,
+          "n": 5
+        }
+      },
+      "no_match": {
+        "n": 3,
+        "ids": [
+          "Q09",
+          "Q10",
+          "Q16"
+        ],
+        "correct_count": 0,
+        "correct_rate": 0.0,
+        "queries": {
+          "Q09": {
+            "correct": false,
+            "max_score": 0.3807,
+            "returned_above_floor": 1
+          },
+          "Q10": {
+            "correct": false,
+            "max_score": 0.518,
+            "returned_above_floor": 5
+          },
+          "Q16": {
+            "correct": false,
+            "max_score": 0.3898,
+            "returned_above_floor": 5
+          }
+        }
+      },
+      "per_query": [
+        {
+          "query_id": "Q01",
+          "text": "What is the minimum public liability insurance a supplier must hold?",
+          "category": "exact_term",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.521399347679975,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.5214,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.3822,
+              "chunk_id": "DOC-001-sourcing-policy.md:1689:3595",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.3811,
+              "chunk_id": "DOC-001-sourcing-policy.md:0:2004",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.3729,
+              "chunk_id": "DOC-004-onboarding-screening.md:3036:5020",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.3693,
+              "chunk_id": "DOC-004-onboarding-screening.md:4710:6553",
+              "source_file": "DOC-004-onboarding-screening.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q02",
+          "text": "What are the standard payment terms for a valid invoice?",
+          "category": "exact_term",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.6440731495886856,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.6441,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.5417,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.5388,
+              "chunk_id": "DOC-003-pricing-payment.md:1507:3269",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.4482,
+              "chunk_id": "DOC-003-pricing-payment.md:0:1813",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.4059,
+              "chunk_id": "DOC-005-delivery-inspection.md:4460:6305",
+              "source_file": "DOC-005-delivery-inspection.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q03",
+          "text": "What weighting is given to price in supplier evaluation?",
+          "category": "exact_term",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.5031666294894203,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.5032,
+              "chunk_id": "DOC-001-sourcing-policy.md:1689:3595",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.4318,
+              "chunk_id": "DOC-001-sourcing-policy.md:0:2004",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.4172,
+              "chunk_id": "DOC-001-sourcing-policy.md:6444:6896",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.4169,
+              "chunk_id": "DOC-001-sourcing-policy.md:3260:5186",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.4066,
+              "chunk_id": "DOC-001-sourcing-policy.md:4862:6793",
+              "source_file": "DOC-001-sourcing-policy.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q04",
+          "text": "How long is the inspection window for delivered goods?",
+          "category": "exact_term",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.5882086570620733,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.5882,
+              "chunk_id": "DOC-005-delivery-inspection.md:2979:4790",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.5396,
+              "chunk_id": "DOC-005-delivery-inspection.md:4460:6305",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.5094,
+              "chunk_id": "DOC-005-delivery-inspection.md:0:1814",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.4764,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.458,
+              "chunk_id": "DOC-005-delivery-inspection.md:5982:6432",
+              "source_file": "DOC-005-delivery-inspection.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q05",
+          "text": "Can a vendor hand the agreement over to another company?",
+          "category": "synonym_poor",
+          "hit_at_1": false,
+          "hit_at_5": true,
+          "first_match_rank": 4,
+          "reciprocal_rank": 0.25,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.4111000467777432,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.4111,
+              "chunk_id": "DOC-002-contract-terms.md:4411:6340",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.3752,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.3691,
+              "chunk_id": "DOC-002-contract-terms.md:5996:6414",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.3684,
+              "chunk_id": "DOC-002-contract-terms.md:2976:4741",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.3654,
+              "chunk_id": "DOC-002-contract-terms.md:0:1842",
+              "source_file": "DOC-002-contract-terms.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q06",
+          "text": "Is it acceptable to split an order into several separate shipments?",
+          "category": "synonym_poor",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.40536753432999906,
+          "returned_above_floor": 2,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.4054,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.366,
+              "chunk_id": "DOC-005-delivery-inspection.md:2979:4790",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.3261,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.3181,
+              "chunk_id": "DOC-005-delivery-inspection.md:0:1814",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.3136,
+              "chunk_id": "DOC-005-delivery-inspection.md:4460:6305",
+              "source_file": "DOC-005-delivery-inspection.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q07",
+          "text": "How much notice is required before a supplier is removed, and does the contract override it?",
+          "category": "multi_chunk",
+          "hit_at_1": false,
+          "hit_at_5": true,
+          "first_match_rank": 2,
+          "reciprocal_rank": 0.5,
+          "matched_anchor_count": 2,
+          "anchor_count": 2,
+          "full_hit": true,
+          "max_score": 0.6371908904134245,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.6372,
+              "chunk_id": "DOC-002-contract-terms.md:2976:4741",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.6124,
+              "chunk_id": "DOC-002-contract-terms.md:1560:3260",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.524,
+              "chunk_id": "DOC-002-contract-terms.md:4411:6340",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.5113,
+              "chunk_id": "DOC-001-sourcing-policy.md:4862:6793",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.49,
+              "chunk_id": "DOC-002-contract-terms.md:0:1842",
+              "source_file": "DOC-002-contract-terms.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q08",
+          "text": "What must be in place before a supplier's first invoice can be paid?",
+          "category": "multi_chunk",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 2,
+          "anchor_count": 2,
+          "full_hit": true,
+          "max_score": 0.5963670774669282,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.5964,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.5373,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.5294,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.521,
+              "chunk_id": "DOC-003-pricing-payment.md:1507:3269",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.5189,
+              "chunk_id": "DOC-004-onboarding-screening.md:3036:5020",
+              "source_file": "DOC-004-onboarding-screening.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q09",
+          "text": "What interest rate is charged on a late payment?",
+          "category": "no_match",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 0,
+          "full_hit": false,
+          "max_score": 0.38065742453305784,
+          "returned_above_floor": 1,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.3807,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.3437,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.279,
+              "chunk_id": "DOC-003-pricing-payment.md:1507:3269",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.2786,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.2691,
+              "chunk_id": "DOC-005-delivery-inspection.md:5982:6432",
+              "source_file": "DOC-005-delivery-inspection.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q10",
+          "text": "What penalty fee applies to a late delivery?",
+          "category": "no_match",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 0,
+          "full_hit": false,
+          "max_score": 0.5179814185076721,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.518,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.4787,
+              "chunk_id": "DOC-005-delivery-inspection.md:2979:4790",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.4285,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.3995,
+              "chunk_id": "DOC-005-delivery-inspection.md:5982:6432",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.377,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q11",
+          "text": "What happens if a company we buy from goes bust?",
+          "category": "semantic_only",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.3541619585904891,
+          "returned_above_floor": 2,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.3542,
+              "chunk_id": "DOC-002-contract-terms.md:2976:4741",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.3516,
+              "chunk_id": "DOC-004-onboarding-screening.md:4710:6553",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.3272,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.3127,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.302,
+              "chunk_id": "DOC-004-onboarding-screening.md:3036:5020",
+              "source_file": "DOC-004-onboarding-screening.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q12",
+          "text": "How quickly does a data leak have to be reported to us?",
+          "category": "semantic_only",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.3778460435232333,
+          "returned_above_floor": 1,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.3778,
+              "chunk_id": "DOC-004-onboarding-screening.md:4710:6553",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.3047,
+              "chunk_id": "DOC-001-sourcing-policy.md:4862:6793",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.2932,
+              "chunk_id": "DOC-005-delivery-inspection.md:5982:6432",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.286,
+              "chunk_id": "DOC-005-delivery-inspection.md:4460:6305",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.282,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q13",
+          "text": "Do we get money off for paying a bill quickly?",
+          "category": "semantic_only",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.37921852824752295,
+          "returned_above_floor": 1,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.3792,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.3371,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.2926,
+              "chunk_id": "DOC-003-pricing-payment.md:1507:3269",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.2636,
+              "chunk_id": "DOC-002-contract-terms.md:1560:3260",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.2499,
+              "chunk_id": "DOC-003-pricing-payment.md:0:1813",
+              "source_file": "DOC-003-pricing-payment.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q14",
+          "text": "Who pays when a truck turns up at the wrong time and is turned away?",
+          "category": "semantic_only",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 1,
+          "full_hit": false,
+          "max_score": 0.30674778542279785,
+          "returned_above_floor": 0,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.3067,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.2944,
+              "chunk_id": "DOC-005-delivery-inspection.md:5982:6432",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.2853,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.2822,
+              "chunk_id": "DOC-005-delivery-inspection.md:2979:4790",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.2771,
+              "chunk_id": "DOC-005-delivery-inspection.md:4460:6305",
+              "source_file": "DOC-005-delivery-inspection.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q15",
+          "text": "Is it ever allowed to pick one firm without asking others for prices?",
+          "category": "semantic_only",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.34837886086873227,
+          "returned_above_floor": 0,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.3484,
+              "chunk_id": "DOC-001-sourcing-policy.md:3260:5186",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.3206,
+              "chunk_id": "DOC-001-sourcing-policy.md:0:2004",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.3166,
+              "chunk_id": "DOC-001-sourcing-policy.md:1689:3595",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.3124,
+              "chunk_id": "DOC-003-pricing-payment.md:0:1813",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.3013,
+              "chunk_id": "DOC-001-sourcing-policy.md:4862:6793",
+              "source_file": "DOC-001-sourcing-policy.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q16",
+          "text": "What is the maximum bulk order discount a supplier can offer?",
+          "category": "no_match",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 0,
+          "full_hit": false,
+          "max_score": 0.3897575856929078,
+          "returned_above_floor": 5,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.3898,
+              "chunk_id": "DOC-001-sourcing-policy.md:1689:3595",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.3783,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.3711,
+              "chunk_id": "DOC-001-sourcing-policy.md:3260:5186",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.3595,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.3581,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            }
+          ]
+        }
+      ]
+    },
+    "hybrid": {
+      "mode": "hybrid",
+      "score_floor": 0.031099324975891997,
+      "rrf_k": 60,
+      "scored_queries": {
+        "hit_at_1": 0.6154,
+        "hit_at_5": 0.8462,
+        "mrr": 0.7308,
+        "n": 13,
+        "ids": [
+          "Q01",
+          "Q02",
+          "Q03",
+          "Q04",
+          "Q05",
+          "Q06",
+          "Q07",
+          "Q08",
+          "Q11",
+          "Q12",
+          "Q13",
+          "Q14",
+          "Q15"
+        ]
+      },
+      "by_category": {
+        "exact_term": {
+          "hit_at_1": 0.75,
+          "hit_at_5": 1.0,
+          "mrr": 0.875,
+          "n": 4
+        },
+        "synonym_poor": {
+          "hit_at_1": 0.5,
+          "hit_at_5": 0.5,
+          "mrr": 0.5,
+          "n": 2
+        },
+        "multi_chunk": {
+          "hit_at_1": 1.0,
+          "hit_at_5": 1.0,
+          "mrr": 1.0,
+          "n": 2,
+          "full_hit_rate": 1.0
+        },
+        "semantic_only": {
+          "hit_at_1": 0.4,
+          "hit_at_5": 0.8,
+          "mrr": 0.6,
+          "n": 5
+        }
+      },
+      "no_match": {
+        "n": 3,
+        "ids": [
+          "Q09",
+          "Q10",
+          "Q16"
+        ],
+        "correct_count": 0,
+        "correct_rate": 0.0,
+        "queries": {
+          "Q09": {
+            "correct": false,
+            "max_score": 0.0323,
+            "returned_above_floor": 4
+          },
+          "Q10": {
+            "correct": false,
+            "max_score": 0.0328,
+            "returned_above_floor": 3
+          },
+          "Q16": {
+            "correct": false,
+            "max_score": 0.0323,
+            "returned_above_floor": 2
+          }
+        }
+      },
+      "per_query": [
+        {
+          "query_id": "Q01",
+          "text": "What is the minimum public liability insurance a supplier must hold?",
+          "category": "exact_term",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.03278688524590164,
+          "returned_above_floor": 2,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0328,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.0312,
+              "chunk_id": "DOC-004-onboarding-screening.md:3036:5020",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.031,
+              "chunk_id": "DOC-001-sourcing-policy.md:0:2004",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0308,
+              "chunk_id": "DOC-004-onboarding-screening.md:4710:6553",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0306,
+              "chunk_id": "DOC-001-sourcing-policy.md:3260:5186",
+              "source_file": "DOC-001-sourcing-policy.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q02",
+          "text": "What are the standard payment terms for a valid invoice?",
+          "category": "exact_term",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.03278688524590164,
+          "returned_above_floor": 4,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0328,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.032,
+              "chunk_id": "DOC-003-pricing-payment.md:1507:3269",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.0315,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0312,
+              "chunk_id": "DOC-003-pricing-payment.md:0:1813",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0306,
+              "chunk_id": "DOC-002-contract-terms.md:0:1842",
+              "source_file": "DOC-002-contract-terms.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q03",
+          "text": "What weighting is given to price in supplier evaluation?",
+          "category": "exact_term",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.03278688524590164,
+          "returned_above_floor": 1,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0328,
+              "chunk_id": "DOC-001-sourcing-policy.md:1689:3595",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.0311,
+              "chunk_id": "DOC-001-sourcing-policy.md:0:2004",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.0308,
+              "chunk_id": "DOC-003-pricing-payment.md:1507:3269",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0303,
+              "chunk_id": "DOC-003-pricing-payment.md:0:1813",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0296,
+              "chunk_id": "DOC-005-delivery-inspection.md:2979:4790",
+              "source_file": "DOC-005-delivery-inspection.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q04",
+          "text": "How long is the inspection window for delivered goods?",
+          "category": "exact_term",
+          "hit_at_1": false,
+          "hit_at_5": true,
+          "first_match_rank": 2,
+          "reciprocal_rank": 0.5,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.032266458495966696,
+          "returned_above_floor": 4,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0323,
+              "chunk_id": "DOC-005-delivery-inspection.md:0:1814",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.0323,
+              "chunk_id": "DOC-005-delivery-inspection.md:2979:4790",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.0323,
+              "chunk_id": "DOC-005-delivery-inspection.md:4460:6305",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0312,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0308,
+              "chunk_id": "DOC-005-delivery-inspection.md:5982:6432",
+              "source_file": "DOC-005-delivery-inspection.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q05",
+          "text": "Can a vendor hand the agreement over to another company?",
+          "category": "synonym_poor",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 1,
+          "full_hit": false,
+          "max_score": 0.03225806451612903,
+          "returned_above_floor": 1,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0323,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.031,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.031,
+              "chunk_id": "DOC-002-contract-terms.md:0:1842",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0302,
+              "chunk_id": "DOC-002-contract-terms.md:5996:6414",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0299,
+              "chunk_id": "DOC-001-sourcing-policy.md:0:2004",
+              "source_file": "DOC-001-sourcing-policy.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q06",
+          "text": "Is it acceptable to split an order into several separate shipments?",
+          "category": "synonym_poor",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.03278688524590164,
+          "returned_above_floor": 2,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0328,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.0313,
+              "chunk_id": "DOC-005-delivery-inspection.md:4460:6305",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.031,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.031,
+              "chunk_id": "DOC-005-delivery-inspection.md:0:1814",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0306,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q07",
+          "text": "How much notice is required before a supplier is removed, and does the contract override it?",
+          "category": "multi_chunk",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 2,
+          "anchor_count": 2,
+          "full_hit": true,
+          "max_score": 0.03225806451612903,
+          "returned_above_floor": 2,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0323,
+              "chunk_id": "DOC-002-contract-terms.md:1560:3260",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.032,
+              "chunk_id": "DOC-001-sourcing-policy.md:4862:6793",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.031,
+              "chunk_id": "DOC-002-contract-terms.md:0:1842",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0306,
+              "chunk_id": "DOC-004-onboarding-screening.md:3036:5020",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0303,
+              "chunk_id": "DOC-004-onboarding-screening.md:4710:6553",
+              "source_file": "DOC-004-onboarding-screening.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q08",
+          "text": "What must be in place before a supplier's first invoice can be paid?",
+          "category": "multi_chunk",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 2,
+          "anchor_count": 2,
+          "full_hit": true,
+          "max_score": 0.03278688524590164,
+          "returned_above_floor": 3,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0328,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.0318,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.0315,
+              "chunk_id": "DOC-004-onboarding-screening.md:3036:5020",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0308,
+              "chunk_id": "DOC-003-pricing-payment.md:1507:3269",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0306,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q09",
+          "text": "What interest rate is charged on a late payment?",
+          "category": "no_match",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 0,
+          "full_hit": false,
+          "max_score": 0.032266458495966696,
+          "returned_above_floor": 4,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0323,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.032,
+              "chunk_id": "DOC-003-pricing-payment.md:1507:3269",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.0318,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0313,
+              "chunk_id": "DOC-003-pricing-payment.md:0:1813",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.031,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q10",
+          "text": "What penalty fee applies to a late delivery?",
+          "category": "no_match",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 0,
+          "full_hit": false,
+          "max_score": 0.03278688524590164,
+          "returned_above_floor": 3,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0328,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.0323,
+              "chunk_id": "DOC-005-delivery-inspection.md:2979:4790",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.0315,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0308,
+              "chunk_id": "DOC-005-delivery-inspection.md:5982:6432",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0303,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q11",
+          "text": "What happens if a company we buy from goes bust?",
+          "category": "semantic_only",
+          "hit_at_1": false,
+          "hit_at_5": true,
+          "first_match_rank": 2,
+          "reciprocal_rank": 0.5,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.032266458495966696,
+          "returned_above_floor": 1,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0323,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.0307,
+              "chunk_id": "DOC-002-contract-terms.md:2976:4741",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.0292,
+              "chunk_id": "DOC-002-contract-terms.md:4411:6340",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0291,
+              "chunk_id": "DOC-001-sourcing-policy.md:1689:3595",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.029,
+              "chunk_id": "DOC-002-contract-terms.md:1560:3260",
+              "source_file": "DOC-002-contract-terms.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q12",
+          "text": "How quickly does a data leak have to be reported to us?",
+          "category": "semantic_only",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.03278688524590164,
+          "returned_above_floor": 2,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0328,
+              "chunk_id": "DOC-004-onboarding-screening.md:4710:6553",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.0313,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.0308,
+              "chunk_id": "DOC-001-sourcing-policy.md:4862:6793",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0308,
+              "chunk_id": "DOC-004-onboarding-screening.md:3036:5020",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0287,
+              "chunk_id": "DOC-002-contract-terms.md:5996:6414",
+              "source_file": "DOC-002-contract-terms.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q13",
+          "text": "Do we get money off for paying a bill quickly?",
+          "category": "semantic_only",
+          "hit_at_1": false,
+          "hit_at_5": true,
+          "first_match_rank": 2,
+          "reciprocal_rank": 0.5,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.03055037313432836,
+          "returned_above_floor": 0,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0306,
+              "chunk_id": "DOC-002-contract-terms.md:1560:3260",
+              "source_file": "DOC-002-contract-terms.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.0299,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.0298,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0298,
+              "chunk_id": "DOC-003-pricing-payment.md:1507:3269",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0295,
+              "chunk_id": "DOC-003-pricing-payment.md:0:1813",
+              "source_file": "DOC-003-pricing-payment.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q14",
+          "text": "Who pays when a truck turns up at the wrong time and is turned away?",
+          "category": "semantic_only",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 1,
+          "full_hit": false,
+          "max_score": 0.03125763125763126,
+          "returned_above_floor": 1,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0313,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.0309,
+              "chunk_id": "DOC-001-sourcing-policy.md:3260:5186",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.0308,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0299,
+              "chunk_id": "DOC-005-delivery-inspection.md:2979:4790",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0296,
+              "chunk_id": "DOC-002-contract-terms.md:4411:6340",
+              "source_file": "DOC-002-contract-terms.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q15",
+          "text": "Is it ever allowed to pick one firm without asking others for prices?",
+          "category": "semantic_only",
+          "hit_at_1": true,
+          "hit_at_5": true,
+          "first_match_rank": 1,
+          "reciprocal_rank": 1.0,
+          "matched_anchor_count": 1,
+          "anchor_count": 1,
+          "full_hit": true,
+          "max_score": 0.03278688524590164,
+          "returned_above_floor": 2,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0328,
+              "chunk_id": "DOC-001-sourcing-policy.md:3260:5186",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.0318,
+              "chunk_id": "DOC-003-pricing-payment.md:0:1813",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.0303,
+              "chunk_id": "DOC-003-pricing-payment.md:1507:3269",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0297,
+              "chunk_id": "DOC-001-sourcing-policy.md:4862:6793",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0291,
+              "chunk_id": "DOC-001-sourcing-policy.md:0:2004",
+              "source_file": "DOC-001-sourcing-policy.md"
+            }
+          ]
+        },
+        {
+          "query_id": "Q16",
+          "text": "What is the maximum bulk order discount a supplier can offer?",
+          "category": "no_match",
+          "hit_at_1": false,
+          "hit_at_5": false,
+          "first_match_rank": null,
+          "reciprocal_rank": 0.0,
+          "matched_anchor_count": 0,
+          "anchor_count": 0,
+          "full_hit": false,
+          "max_score": 0.03225806451612903,
+          "returned_above_floor": 2,
+          "no_match_correct": false,
+          "top_hits": [
+            {
+              "rank": 1,
+              "score": 0.0323,
+              "chunk_id": "DOC-004-onboarding-screening.md:1530:3369",
+              "source_file": "DOC-004-onboarding-screening.md"
+            },
+            {
+              "rank": 2,
+              "score": 0.0318,
+              "chunk_id": "DOC-003-pricing-payment.md:4450:6060",
+              "source_file": "DOC-003-pricing-payment.md"
+            },
+            {
+              "rank": 3,
+              "score": 0.031,
+              "chunk_id": "DOC-005-delivery-inspection.md:1501:3311",
+              "source_file": "DOC-005-delivery-inspection.md"
+            },
+            {
+              "rank": 4,
+              "score": 0.0303,
+              "chunk_id": "DOC-001-sourcing-policy.md:1689:3595",
+              "source_file": "DOC-001-sourcing-policy.md"
+            },
+            {
+              "rank": 5,
+              "score": 0.0299,
+              "chunk_id": "DOC-003-pricing-payment.md:2956:4752",
+              "source_file": "DOC-003-pricing-payment.md"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

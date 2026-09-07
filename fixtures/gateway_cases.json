@@ -1,0 +1,155 @@
+{
+  "version": "1.0",
+  "purpose": "Deterministic Day 3 fake-transport scenarios. No network calls required.",
+  "cases": [
+    {
+      "id": "G01",
+      "name": "embed_success",
+      "operation": "embed",
+      "transport_outcome": "success",
+      "expected": "success",
+      "retryable": false
+    },
+    {
+      "id": "G02",
+      "name": "chat_success",
+      "operation": "chat",
+      "transport_outcome": "success",
+      "expected": "success",
+      "retryable": false
+    },
+    {
+      "id": "G03",
+      "name": "timeout",
+      "operation": "embed",
+      "transport_outcome": "timeout",
+      "expected_error": "timeout",
+      "retryable": true
+    },
+    {
+      "id": "G04",
+      "name": "rate_limit",
+      "operation": "chat",
+      "transport_outcome": "rate_limit",
+      "expected_error": "rate_limit",
+      "retryable": true
+    },
+    {
+      "id": "G05",
+      "name": "authentication",
+      "operation": "chat",
+      "transport_outcome": "authentication",
+      "expected_error": "authentication",
+      "retryable": false
+    },
+    {
+      "id": "G06",
+      "name": "bad_request",
+      "operation": "chat",
+      "transport_outcome": "bad_request",
+      "expected_error": "bad_request",
+      "retryable": false
+    },
+    {
+      "id": "G07",
+      "name": "server_error",
+      "operation": "embed",
+      "transport_outcome": "server_error",
+      "expected_error": "server_error",
+      "retryable": true
+    },
+    {
+      "id": "G08",
+      "name": "retry_then_success",
+      "operation": "embed",
+      "transport_sequence": [
+        "rate_limit",
+        "success"
+      ],
+      "expected": "success",
+      "expected_retry_count": 1
+    },
+    {
+      "id": "G09",
+      "name": "retry_exhausted",
+      "operation": "chat",
+      "transport_sequence": [
+        "server_error",
+        "server_error",
+        "server_error"
+      ],
+      "expected_error": "server_error",
+      "expected": "retry_ceiling_reached"
+    },
+    {
+      "id": "G10",
+      "name": "fallback_allowed",
+      "operation": "chat",
+      "primary_outcome": "server_error",
+      "fallback_policy": {
+        "provider_compatible": true,
+        "region_compatible": true,
+        "data_boundary_compatible": true,
+        "risk_compatible": true,
+        "budget_compatible": true
+      },
+      "expected": "fallback_allowed"
+    },
+    {
+      "id": "G11",
+      "name": "fallback_region_blocked",
+      "operation": "chat",
+      "primary_outcome": "server_error",
+      "fallback_policy": {
+        "provider_compatible": true,
+        "region_compatible": false,
+        "data_boundary_compatible": true,
+        "risk_compatible": true,
+        "budget_compatible": true
+      },
+      "expected": "fallback_blocked"
+    },
+    {
+      "id": "G12",
+      "name": "fallback_data_boundary_blocked",
+      "operation": "chat",
+      "primary_outcome": "server_error",
+      "fallback_policy": {
+        "provider_compatible": true,
+        "region_compatible": true,
+        "data_boundary_compatible": false,
+        "risk_compatible": true,
+        "budget_compatible": true
+      },
+      "expected": "fallback_blocked"
+    },
+    {
+      "id": "G13",
+      "name": "fallback_risk_blocked",
+      "operation": "chat",
+      "primary_outcome": "server_error",
+      "fallback_policy": {
+        "provider_compatible": true,
+        "region_compatible": true,
+        "data_boundary_compatible": true,
+        "risk_compatible": false,
+        "budget_compatible": true
+      },
+      "expected": "fallback_blocked"
+    },
+    {
+      "id": "G14",
+      "name": "fallback_budget_blocked",
+      "operation": "chat",
+      "primary_outcome": "server_error",
+      "fallback_policy": {
+        "provider_compatible": true,
+        "region_compatible": true,
+        "data_boundary_compatible": true,
+        "risk_compatible": true,
+        "budget_compatible": false
+      },
+      "expected": "fallback_blocked"
+    }
+  ]
+}
