@@ -21,6 +21,7 @@ COPY config ./config
 COPY contracts ./contracts
 COPY data ./data
 COPY evals ./evals
+RUN mkdir -p artifacts/day07 && chown -R appuser:appuser /app
 ENV PATH="/app/.venv/bin:$PATH" \
     PYTHONPATH="/app/src" \
     PYTHONDONTWRITEBYTECODE=1
