@@ -39,6 +39,9 @@ def test_reports_are_generated_from_a_run(tmp_path: Path) -> None:
     markdown = (tmp_path / "evaluation_report.md").read_text(encoding="utf-8")
     assert payload["deterministic"]["hit_at_k"] == run.metrics["hit_at_k"]
     assert payload["model_based"]["groundedness"] == run.metrics["groundedness"]
+    assert payload["stability"]["cases"]
+    assert payload["stability"]["cases"][0]["groundedness"]["values"]
+    assert payload["holdout_separation"]["holdout_excluded_from_release_metrics"] is True
     assert "AI score" not in markdown
     assert "Deterministic checks" in markdown
     assert "Model-based groundedness" in markdown

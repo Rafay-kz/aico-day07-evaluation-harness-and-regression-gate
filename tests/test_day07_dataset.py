@@ -42,6 +42,17 @@ def test_unique_case_ids() -> None:
     assert len(ids) == len(set(ids))
 
 
+def test_ambiguous_questions_are_not_near_duplicates() -> None:
+    questions = [
+        case.question.lower()
+        for case in load_dataset().cases
+        if case.category == "ambiguous"
+    ]
+    assert len(questions) == len(set(questions))
+    reused = [q for q in questions if "supplier is good" in q]
+    assert len(reused) <= 1
+
+
 def test_exactly_one_valid_split_per_case() -> None:
     counts = split_counts(load_dataset())
     assert set(counts) == set(REQUIRED_SPLITS)

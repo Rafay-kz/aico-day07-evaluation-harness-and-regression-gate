@@ -1,0 +1,29 @@
+# Day 7 git history (lockfile and reviewed baseline)
+
+This file is the portable record for reviewers who receive a zip without `.git`.
+The GitHub repository is https://github.com/Rafay-kz/aico-day07-evaluation-harness-and-regression-gate
+
+## Commits that established uv.lock and the reviewed baseline
+
+```
+e4ed23e Adopt uv with a locked project and document the Day 7 eval workflow.
+412a99d Add the labelled golden dataset, release thresholds, and reviewed baseline.
+```
+
+`uv.lock` was added in `e4ed23e` and is the committed lockfile used by CI and Docker (`uv sync --frozen`).
+
+`evals/baseline_v1.json` was added in `412a99d`. Later updates rewrite it only through `--update-baseline --reviewed-by`.
+
+## Recent history
+
+```
+8f51d4a Allow the container user to write Day 7 evaluation artifacts.
+c5a73cc Add a GitHub Actions quality gate for lint, tests, and evaluation.
+8c817df Add a multi-stage Docker image that runs the locked evaluation gate.
+f11ff50 Record generated Day 7 evaluation and controlled-regression artifacts.
+972363c Add Day 7 tests for splits, metrics, safety, and baseline immutability.
+b499b25 Implement the Day 7 evaluation harness and regression gate.
+412a99d Add the labelled golden dataset, release thresholds, and reviewed baseline.
+e4ed23e Adopt uv with a locked project and document the Day 7 eval workflow.
+fe29ff1 Bring the Days 1-6 grounded RAG service into the Day 7 workspace.
+```

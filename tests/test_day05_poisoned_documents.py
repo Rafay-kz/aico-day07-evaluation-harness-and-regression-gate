@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from aico.rag.answer_service import GroundedAnswer
+from aico.rag.answer_service import GroundedAnswer, InsufficientEvidence
 from aico.rag.prompt_builder import SYSTEM_INSTRUCTIONS, build_messages, evidence_in_system_instructions
 from tests.day05_helpers import answer_cases, cited_answer_json, chunks_from_case, make_service
 
@@ -51,3 +51,23 @@ def test_poisoned_document_cannot_override_behavior() -> None:
     assert chunks[0].text not in system
     assert SYSTEM_INSTRUCTIONS in system
     assert "untrusted" in transport.last_chat_messages[1].content.lower()
+
+
+def test_poisoned_model_output_is_rejected_even_with_valid_citation() -> None:
+    case = answer_cases()["ANS-003"]
+    chunks = chunks_from_case(case)
+    raw = cited_answer_json(
+        status="answered",
+        answer="The supplier risk score is 99.",
+        citations=[{"chunk_id": "CHUNK-103", "source_file": "synthetic"}],
+        confidence_label="medium",
+    )
+    service, transport, retriever = make_service([raw], chunks)
+    result = service.answer(case["question"])
+    assert isinstance(result, InsufficientEvidence)
+    assert result.invented_fact is True
+    assert "99" not in result.cited_answer.answer
+    assert "risk score" not in result.cited_answer.answer.lower()
+    assert result.cited_answer.citations == []
+    assert retriever.calls == [case["question"]]
+    assert transport.chat_calls == 1

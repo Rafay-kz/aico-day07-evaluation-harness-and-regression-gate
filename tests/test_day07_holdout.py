@@ -46,6 +46,7 @@ def test_update_baseline_does_not_copy_holdout_into_tuning_labels(tmp_path: Path
         artifacts_dir=tmp_path / "out",
         baseline_path=baseline,
         update_baseline=True,
+        reviewed_by="Abdul Rafay",
         write_reports=False,
     )
     after = json.loads(Path("evals/golden_v1.json").read_text(encoding="utf-8"))
@@ -55,3 +56,32 @@ def test_update_baseline_does_not_copy_holdout_into_tuning_labels(tmp_path: Path
     assert "metrics" in written
     assert holdout_ids
     assert "labels" not in written
+    assert written["holdout_excluded_from_metrics"] is True
+    assert written["splits_used"] == ["train", "development"]
+
+
+def test_holdout_outcome_changes_do_not_change_baseline_metrics() -> None:
+    from copy import deepcopy
+
+    from aico.evals.day07 import aggregate_metrics, release_rows
+
+    run = run_evaluation(write_reports=False)
+    original = deepcopy(run.rows)
+    mutated = deepcopy(run.rows)
+    holdout_changed = 0
+    for row in mutated:
+        if row["split"] == "holdout":
+            row["refusal_correct"] = not row["refusal_correct"]
+            holdout_changed += 1
+    assert holdout_changed >= 1
+    left = aggregate_metrics(release_rows(original), k=run.dataset.k)
+    right = aggregate_metrics(release_rows(mutated), k=run.dataset.k)
+    for key in (
+        "hit_at_k",
+        "mrr",
+        "citation_validity",
+        "refusal_accuracy",
+        "groundedness",
+        "attack_pass_rate",
+    ):
+        assert left[key] == right[key]

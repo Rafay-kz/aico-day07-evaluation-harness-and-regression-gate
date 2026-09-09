@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Protocol
 
 from aico.contracts.errors import TypedFailure
-from aico.contracts.models import CitedAnswer, Status
+from aico.contracts.models import SCHEMA_VERSION_V1, CitedAnswer, ConfidenceLabel, Status
 from aico.contracts.service import ingest_cited_answer
 from aico.observability.logging import log_operation
 from aico.observability.telemetry import PipelineStats, get_tracer, span_attributes
@@ -16,6 +16,7 @@ from aico.rag.citation_validator import (
     CitationValidationResult,
     validate_answer_citations,
 )
+from aico.rag.evidence_guard import unsupported_poisoned_claims
 from aico.rag.prompt_builder import RetrievedChunk, build_messages
 from aico.retrieval.search import search
 from aico.security.input_policy import PolicyDecision, evaluate_policy
@@ -211,6 +212,28 @@ class AnswerService:
                 )
                 # Fail closed: do not drop forged IDs and keep the answer.
                 return citation_result.to_failure()
+            poison_reason = unsupported_poisoned_claims(typed.answer, chunks)
+            if typed.status == Status.answered and poison_reason:
+                log_operation(
+                    stage="validation",
+                    outcome="failure",
+                    error_category="unsupported_claim",
+                    latency_ms=(time.perf_counter() - started) * 1000.0,
+                )
+                return InsufficientEvidence(
+                    question=question,
+                    cited_answer=CitedAnswer(
+                        schema_version=SCHEMA_VERSION_V1,
+                        status=Status.insufficient_evidence,
+                        answer="INSUFFICIENT_EVIDENCE: retrieved evidence does not support the claimed facts.",
+                        citations=[],
+                        confidence_label=ConfidenceLabel.low,
+                    ),
+                    retrieved_chunk_ids=retrieved_ids,
+                    explanation=poison_reason,
+                    invented_fact=True,
+                    invented_citation=False,
+                )
             log_operation(
                 stage="validation",
                 outcome="ok",

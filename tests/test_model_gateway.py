@@ -72,7 +72,7 @@ def test_foundry_adapter_is_the_only_openai_import() -> None:
     openai_files = []
     for path in _iter_python_files(SRC_ROOT):
         if any(_is_model_sdk(name) for name in _imported_names(path)):
-            openai_files.append(str(path.relative_to(SRC_ROOT)))
+            openai_files.append(path.relative_to(SRC_ROOT).as_posix())
     assert openai_files == ["platform/foundry_adapter.py"]
 
 
@@ -80,7 +80,7 @@ def test_identity_sdk_only_in_foundry_adapter() -> None:
     files = []
     for path in _iter_python_files(SRC_ROOT):
         if any(_is_identity_sdk(name) for name in _imported_names(path)):
-            files.append(str(path.relative_to(SRC_ROOT)))
+            files.append(path.relative_to(SRC_ROOT).as_posix())
     assert files == ["platform/foundry_adapter.py"]
 
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from collections.abc import Sequence
 from dataclasses import dataclass
@@ -14,6 +15,7 @@ from aico.contracts.errors import TypedFailure
 from aico.evals.dataset import (
     GoldenCase,
     GoldenDataset,
+    TUNING_SPLITS,
     category_counts,
     iter_holdout_cases,
     iter_tuning_cases,
@@ -70,6 +72,14 @@ APPROVED_MODE = "bm25"
 WEAK_TOP_K = 1
 LAB_CHAT_ALIAS = "eval-lab-chat-v1"
 LAB_EMBED_ALIAS = "eval-lab-embed-v1"
+LAB_TRANSPORT = "lab"
+FOUNDRY_TRANSPORT = "foundry"
+GROUNDEDNESS_FAIL_SCORE = 0.5
+CI_EVIDENCE_NOTE = (
+    "Default CI/Docker uses deterministic EvalLabTransport through Model Gateway. "
+    "That is not a cloud-model run. Set AICO_EVAL_TRANSPORT=foundry or "
+    "--evaluator-transport foundry to grade with the live Foundry route."
+)
 
 
 @dataclass(frozen=True)
@@ -115,19 +125,35 @@ def outcome_of(result: object) -> str:
     return "unknown"
 
 
-def make_service(retrieval: RetrievalConfig) -> tuple[AnswerService, ModelGateway, EvalLabTransport]:
+def resolve_evaluator_transport(kind: str | None = None) -> str:
+    raw = (kind or os.environ.get("AICO_EVAL_TRANSPORT") or LAB_TRANSPORT).strip().lower()
+    if raw in {FOUNDRY_TRANSPORT, "cloud", "real"}:
+        return FOUNDRY_TRANSPORT
+    return LAB_TRANSPORT
+
+
+def make_service(
+    retrieval: RetrievalConfig,
+    *,
+    evaluator_transport: str = LAB_TRANSPORT,
+) -> tuple[AnswerService, ModelGateway, str]:
+    retriever = Day2Retriever(
+        Path(retrieval.index_dir),
+        mode=retrieval.mode,
+        top_k=retrieval.top_k,
+    )
+    if evaluator_transport == FOUNDRY_TRANSPORT:
+        from aico.platform.model_gateway import build_foundry_gateway
+
+        gateway = build_foundry_gateway()
+        return AnswerService(gateway, retriever, allow_repair=True), gateway, FOUNDRY_TRANSPORT
     transport = EvalLabTransport()
     gateway = ModelGateway(
         transport,
         testing_config(chat_alias=LAB_CHAT_ALIAS, embedding_alias=LAB_EMBED_ALIAS),
         sleep=lambda _seconds: None,
     )
-    retriever = Day2Retriever(
-        Path(retrieval.index_dir),
-        mode=retrieval.mode,
-        top_k=retrieval.top_k,
-    )
-    return AnswerService(gateway, retriever, allow_repair=True), gateway, transport
+    return AnswerService(gateway, retriever, allow_repair=True), gateway, LAB_TRANSPORT
 
 
 def evaluate_case(
@@ -160,9 +186,9 @@ def evaluate_case(
     hit = False
     rr = 0.0
     if case.expected_sources:
-        hit = hit_at_k(hits, case.expected_sources, k=k)
-        rr = reciprocal_rank(hits, case.expected_sources, k=k)
-        rank = first_match_rank(hits, case.expected_sources)
+        hit = hit_at_k(hits, case.expected_sources, k=k, anchors=case.critical_facts)
+        rr = reciprocal_rank(hits, case.expected_sources, k=k, anchors=case.critical_facts)
+        rank = first_match_rank(hits, case.expected_sources, anchors=case.critical_facts)
 
     answer_text = ""
     cited_ids: list[str] = []
@@ -212,6 +238,7 @@ def evaluate_case(
         "critical_facts_in_retrieved": facts_in_retrieved,
         "groundedness_score": grounded.score if grounded is not None else 1.0,
     }
+    groundedness_score = observation["groundedness_score"]
     case_failed = _case_failed(
         case,
         refusal_correct=refusal_correct,
@@ -221,6 +248,8 @@ def evaluate_case(
         missing_facts=missing_facts,
         evaluator_error=evaluator_error,
         attack_pass=attack_pass,
+        groundedness_score=groundedness_score,
+        grounded_evaluated=grounded is not None,
     )
     failure_type = classify_failure(observation) if case_failed else None
     reason = _failure_reason(
@@ -231,6 +260,7 @@ def evaluate_case(
         missing_facts=missing_facts,
         evaluator_error=evaluator_error,
         citation_valid=citation_valid,
+        groundedness_score=groundedness_score if grounded is not None else None,
     )
     return {
         "case_id": case.case_id,
@@ -284,6 +314,8 @@ def _case_failed(
     missing_facts: Sequence[str],
     evaluator_error: str | None,
     attack_pass: bool | None,
+    groundedness_score: float,
+    grounded_evaluated: bool,
 ) -> bool:
     if evaluator_error:
         return True
@@ -299,6 +331,8 @@ def _case_failed(
         return True
     if case.expected_outcome == "answer" and missing_facts:
         return True
+    if grounded_evaluated and groundedness_score < GROUNDEDNESS_FAIL_SCORE:
+        return True
     return False
 
 
@@ -311,6 +345,7 @@ def _failure_reason(
     missing_facts: Sequence[str],
     evaluator_error: str | None,
     citation_valid: bool | None,
+    groundedness_score: float | None,
 ) -> str:
     if evaluator_error:
         return evaluator_error
@@ -324,6 +359,8 @@ def _failure_reason(
         return "expected sources were not present in retrieved hits"
     if missing_facts:
         return "missing critical facts: " + ", ".join(missing_facts)
+    if groundedness_score is not None and groundedness_score < GROUNDEDNESS_FAIL_SCORE:
+        return f"groundedness {groundedness_score:.4f} below {GROUNDEDNESS_FAIL_SCORE}"
     if observed != case.expected_outcome:
         return f"observed {observed}, expected {case.expected_outcome}"
     return "case failed deterministic checks"
@@ -332,9 +369,14 @@ def _failure_reason(
 def aggregate_metrics(rows: Sequence[dict[str, Any]], k: int) -> dict[str, float]:
     retrieval_rows = [row for row in rows if row["hit_at_k"] is not None]
     citation_rows = [row for row in rows if row["citation_valid"] is not None]
-    grounded_rows = [
-        row for row in rows if row.get("groundedness") and row["groundedness"].get("error") is None
-    ]
+    grounded_rows = [row for row in rows if row.get("groundedness")]
+    grounded_scores: list[float] = []
+    for row in grounded_rows:
+        payload = row["groundedness"]
+        if payload.get("error"):
+            grounded_scores.append(0.0)
+        else:
+            grounded_scores.append(float(payload["score"]))
     adversarial = [row for row in rows if row["category"] == "adversarial"]
     return {
         "hit_at_k": mean_hit_at_k([bool(row["hit_at_k"]) for row in retrieval_rows]),
@@ -343,9 +385,7 @@ def aggregate_metrics(rows: Sequence[dict[str, Any]], k: int) -> dict[str, float
             [bool(row["citation_valid"]) for row in citation_rows]
         ),
         "refusal_accuracy": mean_hit_at_k([bool(row["refusal_correct"]) for row in rows]),
-        "groundedness": mean_mrr(
-            [float(row["groundedness"]["score"]) for row in grounded_rows]
-        ),
+        "groundedness": mean_mrr(grounded_scores),
         "attack_pass_rate": mean_hit_at_k(
             [bool(row["attack_pass"]) for row in adversarial]
         ),
@@ -353,7 +393,13 @@ def aggregate_metrics(rows: Sequence[dict[str, Any]], k: int) -> dict[str, float
         "n": float(len(rows)),
         "n_retrieval": float(len(retrieval_rows)),
         "n_groundedness": float(len(grounded_rows)),
+        "n_evaluator_errors": float(sum(1 for row in rows if row.get("evaluator_error"))),
     }
+
+
+def release_rows(rows: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Train + development only. Holdout must not drive thresholds or baseline updates."""
+    return [row for row in rows if row["split"] in TUNING_SPLITS]
 
 
 def run_stability(
@@ -362,6 +408,7 @@ def run_stability(
     retrieval: RetrievalConfig,
     k: int,
     repeats: int | None = None,
+    evaluator_transport: str = LAB_TRANSPORT,
 ) -> dict[str, Any]:
     count = repeats if repeats is not None else max(dataset.stability_repeats, 2)
     selected = [
@@ -374,7 +421,9 @@ def run_stability(
         scores: list[float] = []
         outcomes: list[str] = []
         for _repeat in range(count):
-            service, gateway, _transport = make_service(retrieval)
+            service, gateway, _mode = make_service(
+                retrieval, evaluator_transport=evaluator_transport
+            )
             row = evaluate_case(case, retrieval=retrieval, service=service, gateway=gateway, k=k)
             outcomes.append(str(row["observed_outcome"]))
             grounded = row.get("groundedness") or {}
@@ -414,40 +463,53 @@ def run_evaluation(
     top_k: int = APPROVED_TOP_K,
     mode: str = APPROVED_MODE,
     update_baseline: bool = False,
+    reviewed_by: str = "",
     write_reports: bool = True,
+    evaluator_transport: str | None = None,
 ) -> EvaluationRun:
     dataset = load_dataset(dataset_path)
     thresholds = load_thresholds(thresholds_path)
+    transport_kind = resolve_evaluator_transport(evaluator_transport)
     retrieval = RetrievalConfig(
         mode=mode,
         top_k=top_k,
         index_dir=str(index_dir),
         version=f"day07-{mode}-top{top_k}",
     )
-    service, gateway, _transport = make_service(retrieval)
+    service, gateway, transport_kind = make_service(
+        retrieval, evaluator_transport=transport_kind
+    )
     rows = [
         evaluate_case(case, retrieval=retrieval, service=service, gateway=gateway, k=dataset.k)
         for case in dataset.cases
     ]
-    metrics = aggregate_metrics(rows, k=dataset.k)
+    overall_metrics = aggregate_metrics(rows, k=dataset.k)
+    gated_rows = release_rows(rows)
+    metrics = aggregate_metrics(gated_rows, k=dataset.k)
     by_split = {
         name: aggregate_metrics([row for row in rows if row["split"] == name], k=dataset.k)
         for name in ("train", "development", "holdout")
     }
+    category_names = (
+        "answerable",
+        "ambiguous",
+        "multi_chunk",
+        "synonym_heavy",
+        "unanswerable",
+        "adversarial",
+    )
     by_category = {
         name: aggregate_metrics([row for row in rows if row["category"] == name], k=dataset.k)
-        for name in (
-            "answerable",
-            "ambiguous",
-            "multi_chunk",
-            "synonym_heavy",
-            "unanswerable",
-            "adversarial",
-        )
+        for name in category_names
+    }
+    release_by_category = {
+        name: aggregate_metrics([row for row in gated_rows if row["category"] == name], k=dataset.k)
+        for name in category_names
     }
     safety_failures = sum(
         1 for row in rows if row["category"] == "adversarial" and row["attack_pass"] is not True
     )
+    evaluator_failures = sum(1 for row in rows if row.get("evaluator_error"))
     baseline = None if update_baseline else load_baseline(baseline_path)
     gate = apply_gate(
         {
@@ -461,20 +523,32 @@ def run_evaluation(
         thresholds,
         baseline=baseline,
         safety_failures=safety_failures,
+        evaluator_failures=evaluator_failures,
+        by_category=release_by_category,
     )
-    stability = run_stability(dataset, retrieval=retrieval, k=dataset.k)
+    stability = run_stability(
+        dataset,
+        retrieval=retrieval,
+        k=dataset.k,
+        evaluator_transport=transport_kind,
+    )
     report = build_report(
         dataset=dataset,
         retrieval=retrieval,
         rows=rows,
         metrics=metrics,
+        overall_metrics=overall_metrics,
         by_split=by_split,
         by_category=by_category,
+        release_by_category=release_by_category,
         gate=gate,
         stability=stability,
         safety_failures=safety_failures,
+        evaluator_failures=evaluator_failures,
         thresholds=thresholds,
         baseline=baseline if not update_baseline else None,
+        evaluator_transport=transport_kind,
+        model_alias=gateway.chat_alias,
     )
     if write_reports:
         write_evaluation_artifacts(artifacts_dir, report, rows, stability)
@@ -482,7 +556,7 @@ def run_evaluation(
         document = build_baseline_document(
             dataset_version=dataset.version,
             evaluator_version=EVALUATOR_VERSION,
-            model_alias=LAB_CHAT_ALIAS,
+            model_alias=gateway.chat_alias,
             retrieval=retrieval.as_dict(),
             metrics={
                 "hit_at_k": metrics["hit_at_k"],
@@ -492,9 +566,12 @@ def run_evaluation(
                 "groundedness": metrics["groundedness"],
                 "attack_pass_rate": metrics["attack_pass_rate"],
             },
+            reviewed_by=reviewed_by,
+            evaluator_transport=transport_kind,
         )
         write_baseline(Path(baseline_path), document)
         report["baseline_updated"] = True
+        report["baseline_reviewed"] = document["reviewed"]
     return EvaluationRun(
         dataset=dataset,
         retrieval=retrieval,
@@ -514,23 +591,32 @@ def build_report(
     retrieval: RetrievalConfig,
     rows: Sequence[dict[str, Any]],
     metrics: dict[str, float],
+    overall_metrics: dict[str, float],
     by_split: dict[str, dict[str, float]],
     by_category: dict[str, dict[str, float]],
+    release_by_category: dict[str, dict[str, float]],
     gate: GateDecision,
     stability: dict[str, Any],
     safety_failures: int,
+    evaluator_failures: int,
     thresholds,
     baseline: dict[str, Any] | None,
+    evaluator_transport: str,
+    model_alias: str,
 ) -> dict[str, Any]:
     failed = [row for row in rows if not row["passed"]]
     failure_summary: dict[str, int] = {}
     for row in failed:
         kind = str(row["failure_type"] or "prompt")
         failure_summary[kind] = failure_summary.get(kind, 0) + 1
+    cloud = evaluator_transport == FOUNDRY_TRANSPORT
     return {
         "dataset_version": dataset.version,
         "evaluator_version": EVALUATOR_VERSION,
-        "model_alias": LAB_CHAT_ALIAS,
+        "model_alias": model_alias,
+        "evaluator_transport": evaluator_transport,
+        "cloud_model_executed": cloud,
+        "ci_evidence_note": CI_EVIDENCE_NOTE,
         "retrieval": retrieval.as_dict(),
         "total_case_count": len(dataset.cases),
         "split_counts": split_counts(dataset),
@@ -544,24 +630,36 @@ def build_report(
             "refusal_accuracy": metrics["refusal_accuracy"],
             "attack_pass_rate": metrics["attack_pass_rate"],
             "k": dataset.k,
+            "scope": "train+development",
         },
         "model_based": {
             "groundedness": metrics["groundedness"],
             "evaluator_version": EVALUATOR_VERSION,
             "n": int(metrics["n_groundedness"]),
+            "evaluator_errors": evaluator_failures,
         },
         "metrics": metrics,
+        "overall_metrics": overall_metrics,
         "by_split": by_split,
         "by_category": by_category,
+        "release_by_category": release_by_category,
         "safety_gate": {
             "zero_tolerance": True,
             "adversarial_failures": safety_failures,
             "passed": safety_failures == 0,
         },
+        "evaluator_gate": {
+            "zero_tolerance": True,
+            "evaluator_failures": evaluator_failures,
+            "passed": evaluator_failures == 0,
+        },
         "thresholds": thresholds.metrics,
+        "category_thresholds": thresholds.by_category,
         "threshold_comparison": list(gate.threshold_failures),
+        "category_comparison": list(gate.category_failures),
         "baseline_comparison": list(gate.baseline_failures),
         "baseline_metrics": (baseline or {}).get("metrics"),
+        "stability": stability,
         "stability_summary": {
             "repeats": stability["repeats"],
             "case_ids": stability["case_ids"],
@@ -586,6 +684,7 @@ def build_report(
         "exit_code": gate.exit_code,
         "holdout_separation": {
             "holdout_excluded_from_tuning": True,
+            "holdout_excluded_from_release_metrics": True,
             "tuning_splits": ["train", "development"],
             "holdout_metrics": by_split["holdout"],
         },
@@ -626,16 +725,20 @@ def render_evaluation_markdown(report: dict[str, Any]) -> str:
         "# Day 7 evaluation report",
         "",
         f"Dataset: `{report['dataset_version']}` ({report['total_case_count']} cases)",
-        f"Evaluator: `{report['evaluator_version']}` via `{report['model_alias']}`",
+        f"Evaluator: `{report['evaluator_version']}` via `{report['model_alias']}` "
+        f"(transport={report.get('evaluator_transport', 'lab')})",
         f"Retrieval: `{report['retrieval']['mode']}` top_k={report['retrieval']['top_k']}",
         f"Final gate verdict: **{report['final_gate_verdict']}**",
+        "",
+        report.get("ci_evidence_note") or CI_EVIDENCE_NOTE,
         "",
         "## Split and category counts",
         "",
         f"Splits: {report['split_counts']}",
         f"Categories: {report['category_counts']}",
         "",
-        "Holdout is reported separately and is not used to tune thresholds, prompts, or labels.",
+        "Holdout is reported separately. Release metrics, thresholds, and baseline "
+        "updates use train+development only.",
         "",
         "## Deterministic checks",
         "",
@@ -683,6 +786,11 @@ def render_evaluation_markdown(report: dict[str, Any]) -> str:
         lines.extend(f"- {item}" for item in report["threshold_comparison"])
     else:
         lines.append("- All threshold comparisons passed.")
+    lines.extend(["", "## Category comparison", ""])
+    if report.get("category_comparison"):
+        lines.extend(f"- {item}" for item in report["category_comparison"])
+    else:
+        lines.append("- All documented category gates passed.")
     lines.extend(["", "## Baseline comparison", ""])
     if report["baseline_metrics"] is None:
         lines.append("- No reviewed baseline loaded (update path or missing file).")
@@ -698,6 +806,7 @@ def render_evaluation_markdown(report: dict[str, Any]) -> str:
             f"Repeats: {report['stability_summary']['repeats']} on "
             f"{', '.join(report['stability_summary']['case_ids'])}.",
             f"Max groundedness range: {report['stability_summary']['max_groundedness_range']:.4f}.",
+            "Per-run numeric scores are stored in `evaluation_report.json` under `stability`.",
             "",
             "## Failed cases",
             "",
@@ -906,7 +1015,18 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--update-baseline",
         action="store_true",
-        help="Deliberate reviewed baseline rewrite. Never used by CI.",
+        help="Deliberate baseline rewrite from train+development metrics. Never used by CI.",
+    )
+    parser.add_argument(
+        "--reviewed-by",
+        default="",
+        help="Reviewer identity required to mark the written baseline as reviewed.",
+    )
+    parser.add_argument(
+        "--evaluator-transport",
+        choices=(LAB_TRANSPORT, FOUNDRY_TRANSPORT),
+        default=None,
+        help="lab (default, CI) or foundry (live Model Gateway evaluator).",
     )
     parser.add_argument(
         "--weaken-retrieval",
@@ -947,6 +1067,8 @@ def main(argv: list[str] | None = None, *, stdout: TextIO | None = None) -> int:
         index_dir=args.index,
         top_k=top_k,
         update_baseline=args.update_baseline,
+        reviewed_by=args.reviewed_by,
+        evaluator_transport=args.evaluator_transport,
     )
     stream.write(f"gate={run.report['final_gate_verdict']} exit={run.gate.exit_code}\n")
     stream.write(

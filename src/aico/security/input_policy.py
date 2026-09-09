@@ -57,6 +57,10 @@ _AMBIGUOUS = (
     "whether the supplier is good",
     "is the supplier good",
     "tell me whether the supplier is good",
+    "supplier suitable to award",
+    "which framework agreement should i use",
+    "start work before the contract",
+    "delivery complaint",
 )
 
 

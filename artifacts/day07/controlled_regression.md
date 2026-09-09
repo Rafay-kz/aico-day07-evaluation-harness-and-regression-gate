@@ -6,15 +6,15 @@ Change: `top_k 5 → 1 → 5 (mode=bm25)`
 
 | Stage | top_k | Verdict | Exit code | Hit@K | MRR |
 |---|---:|---|---:|---:|---:|
-| normal approved | 5 | PASS | 0 | 1.0000 | 0.9306 |
-| weakened retrieval | 1 | FAIL | 1 | 0.8889 | 0.8889 |
-| restored approved | 5 | PASS | 0 | 1.0000 | 0.9306 |
+| normal approved | 5 | PASS | 0 | 1.0000 | 0.9286 |
+| weakened retrieval | 1 | FAIL | 1 | 0.8571 | 0.8571 |
+| restored approved | 5 | PASS | 0 | 1.0000 | 0.9286 |
 
 ## Failed thresholds on weakened run
 
-- hit_at_k 0.8889 < threshold 0.9500
-- mrr 0.8889 < threshold 0.9000
-- refusal_accuracy 0.7812 < threshold 0.8500
+- hit_at_k 0.8571 < threshold 0.9500
+- mrr 0.8571 < threshold 0.9000
+- refusal_accuracy 0.8333 < threshold 0.8500
 
 Proof passed: **True**
 

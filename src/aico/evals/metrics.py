@@ -18,21 +18,48 @@ def source_id(source_file: str) -> str:
     return name
 
 
-def hit_matches_expected(source_file: str, expected_sources: Sequence[str]) -> bool:
-    """Match a retrieved hit against labelled sources. Never consults the raw corpus."""
+def hit_matches_expected(
+    source_file: str,
+    expected_sources: Sequence[str],
+    *,
+    hit_text: str = "",
+    anchors: Sequence[str] = (),
+) -> bool:
+    """Match a retrieved hit. Never consults the raw corpus.
+
+    Day 1 required the relevant answer text to appear in the hit. When anchors
+    (critical facts) are provided, a matching source with unrelated text does
+    not count.
+    """
     retrieved_id = source_id(source_file)
+    source_ok = False
     for expected in expected_sources:
         token = expected.strip().upper()
         if not token:
             continue
         if retrieved_id == token or token in source_file.upper():
-            return True
-    return False
+            source_ok = True
+            break
+    if not source_ok:
+        return False
+    if not anchors:
+        return True
+    return any(contains_fact(hit_text, anchor) for anchor in anchors)
 
 
-def first_match_rank(hits: Sequence[dict], expected_sources: Sequence[str]) -> int | None:
+def first_match_rank(
+    hits: Sequence[dict],
+    expected_sources: Sequence[str],
+    *,
+    anchors: Sequence[str] = (),
+) -> int | None:
     for hit in hits:
-        if hit_matches_expected(str(hit.get("source_file") or ""), expected_sources):
+        if hit_matches_expected(
+            str(hit.get("source_file") or ""),
+            expected_sources,
+            hit_text=str(hit.get("text") or ""),
+            anchors=anchors,
+        ):
             return int(hit["rank"])
     return None
 
@@ -41,9 +68,11 @@ def hit_at_k(
     hits: Sequence[dict],
     expected_sources: Sequence[str],
     k: int = HIT_K,
+    *,
+    anchors: Sequence[str] = (),
 ) -> bool:
-    """Day 1 Hit@K: a labelled source appears at rank <= K in the retrieved list."""
-    rank = first_match_rank(hits, expected_sources)
+    """Day 1 Hit@K: a relevant labelled source appears at rank <= K."""
+    rank = first_match_rank(hits, expected_sources, anchors=anchors)
     return rank is not None and rank <= k
 
 
@@ -51,9 +80,11 @@ def reciprocal_rank(
     hits: Sequence[dict],
     expected_sources: Sequence[str],
     k: int = HIT_K,
+    *,
+    anchors: Sequence[str] = (),
 ) -> float:
-    """Day 1 MRR contribution: 1/rank of the first match, else 0 if missing from top K."""
-    rank = first_match_rank(hits, expected_sources)
+    """Day 1 MRR contribution: 1/rank of the first relevant match, else 0."""
+    rank = first_match_rank(hits, expected_sources, anchors=anchors)
     if rank is None or rank > k:
         return 0.0
     return 1.0 / rank

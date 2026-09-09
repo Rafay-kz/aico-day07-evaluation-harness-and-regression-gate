@@ -33,12 +33,13 @@ uv run uvicorn aico.api.app:app --reload
 
 ```bash
 uv run python -m aico.evals.day07
-uv run python -m aico.evals.day07 --update-baseline
+uv run python -m aico.evals.day07 --update-baseline --reviewed-by "Your Name"
 uv run python -m aico.evals.day07 --weaken-retrieval
 uv run python -m aico.evals.day07 --prove-controlled-regression
+uv run python -m aico.evals.day07 --evaluator-transport foundry
 ```
 
-`--update-baseline` is the only path that may rewrite `evals/baseline_v1.json`. CI never passes that flag. Holdout is measured and reported; it is not used to tune prompts, retrieval, thresholds, or labels.
+`--update-baseline --reviewed-by NAME` is the only path that may rewrite `evals/baseline_v1.json`. Without `--reviewed-by`, the file is written with `reviewed: false` so a candidate cannot auto-approve itself. CI never passes those flags. Holdout is measured and reported; release metrics, thresholds, and baseline updates use train+development only.
 
 ## Docker
 
@@ -47,7 +48,12 @@ docker build -t aico-day07 .
 docker run --rm aico-day07
 ```
 
-The image is a multi-stage build. It installs from `pyproject.toml` + `uv.lock`, does not copy a local `.venv`, and does not bake credentials.
+The default evaluator transport is deterministic lab traffic through Model Gateway. CI/Docker use that path and must be labelled as fake-only evidence, not a cloud-model run. Optional live grading:
+
+```bash
+export AICO_EVAL_TRANSPORT=foundry
+uv run python -m aico.evals.day07 --evaluator-transport foundry
+```
 
 ## Layout
 

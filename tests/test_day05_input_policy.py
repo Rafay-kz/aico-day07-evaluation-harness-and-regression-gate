@@ -108,7 +108,7 @@ def test_policy_does_not_call_the_model() -> None:
     case = answer_cases()["ANS-001"]
     raw = cited_answer_json(
         status="answered",
-        answer="unused",
+        answer=case["retrieved"][0]["text"],
         citations=[{"chunk_id": "CHUNK-101", "source_file": "synthetic"}],
     )
     service, transport, retriever = make_service([raw], chunks_from_case(case))

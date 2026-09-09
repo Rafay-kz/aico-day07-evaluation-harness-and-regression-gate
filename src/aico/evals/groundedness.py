@@ -17,7 +17,8 @@ EVALUATOR_VERSION = "aico-groundedness-v1"
 EVALUATOR_MARKER = "AICO_GROUNDEDNESS_EVALUATOR_V1"
 SPECIFIC_HINTS = frozenset(
     {
-        "rate",
+        "interest",
+        "apr",
         "vat",
         "ceo",
         "chief",
@@ -130,7 +131,11 @@ def evaluate_groundedness(
     chunks: list[RetrievedChunk],
 ) -> GroundednessResult:
     messages = build_groundedness_messages(question, answer_text, chunks)
-    chat = gateway.chat(ChatRequest(messages=messages))
+    alias = getattr(gateway, "chat_alias", "") or ""
+    try:
+        chat = gateway.chat(ChatRequest(messages=messages))
+    except Exception as exc:
+        return _evaluator_error("", alias, f"evaluator transport failed: {exc}")
     return parse_groundedness(chat.text, model_alias=chat.metadata.model_alias)
 
 
@@ -180,7 +185,9 @@ def answer_from_evidence(messages: list[ChatMessage]) -> str:
                 "confidence_label": "low",
             }
         )
-    answer_text = " ".join(span.strip() for _, span in selected)
+    from aico.rag.evidence_guard import factual_evidence_text
+
+    answer_text = " ".join(factual_evidence_text(span).strip() or span.strip() for _, span in selected)
     citations = []
     seen: set[str] = set()
     for chunk, _span in selected:

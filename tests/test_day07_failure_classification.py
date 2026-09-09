@@ -64,6 +64,18 @@ def test_fact_split_out_of_window_is_chunking() -> None:
     )
 
 
+def test_low_groundedness_from_a_run_is_classified() -> None:
+    observation = {
+        "category": "answerable",
+        "expected_outcome": "answer",
+        "observed_outcome": "answer",
+        "retrieval_hit": True,
+        "citation_valid": True,
+        "groundedness_score": 0.0,
+    }
+    assert classify_failure(observation) == "prompt"
+
+
 def test_evaluator_error_is_evaluator() -> None:
     assert classify_failure({"evaluator_error": "parse failed"}) == "evaluator"
 

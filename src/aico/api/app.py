@@ -436,10 +436,17 @@ def create_app(container: AppContainer | None = None) -> FastAPI:
 
         async def _watch_disconnect() -> None:
             while not token.cancelled:
-                if await request.is_disconnected():
+                try:
+                    disconnected = await asyncio.wait_for(
+                        request.is_disconnected(),
+                        timeout=0.05,
+                    )
+                except TimeoutError:
+                    continue
+                if disconnected:
                     token.cancel()
                     return
-                await asyncio.sleep(0.01)
+                await asyncio.sleep(0.05)
 
         watcher = asyncio.create_task(_watch_disconnect())
         log_operation(stage="api", outcome="started")

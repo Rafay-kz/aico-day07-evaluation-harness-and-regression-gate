@@ -48,6 +48,20 @@ def test_hit_at_k_does_not_use_raw_corpus_membership() -> None:
     assert hit_at_k(hits, ["DOC-004"], k=5) is False
 
 
+def test_hit_at_k_requires_relevant_text_not_just_document_id() -> None:
+    hits = [
+        {
+            "rank": 1,
+            "chunk_id": "c1",
+            "source_file": "DOC-004-onboarding-screening.md",
+            "text": "warehouse opening hours and visitor parking only",
+            "score": 1.0,
+        }
+    ]
+    assert hit_at_k(hits, ["DOC-004"], k=5) is True
+    assert hit_at_k(hits, ["DOC-004"], k=5, anchors=["five million pounds"]) is False
+
+
 def test_citation_validity_accepts_retrieved_ids_and_rejects_forged() -> None:
     assert citation_is_valid(["a"], ["a", "b"]) is True
     assert citation_is_valid(["forged"], ["a", "b"]) is False
